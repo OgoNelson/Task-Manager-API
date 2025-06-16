@@ -4,9 +4,9 @@ const router = express.Router();
 
 const tasksController = require("./tasks.controller");
 const tasksMiddleware = require("./tasks.middleware");
-//const userMiddleware = require("../users/users.middleware");
+const userMiddleware = require("../users/users.middleware");
 
-//router.use(userMiddleware.AuthorizeUser);
+router.use(userMiddleware.AuthorizeUser);
 
 // create task route
 router.post(
@@ -17,5 +17,8 @@ router.post(
 
 //get tasks route
 router.get("/", tasksController.getTasksController);
+
+//update task route
+router.put("/", tasksController.updateTaskController);
 
 module.exports = router;

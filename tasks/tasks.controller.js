@@ -43,7 +43,31 @@ const getTasksController = async (req, res) => {
   }
 };
 
+//update controller function
+const updateTaskController = async (req, res) => {
+  try {
+    const { title } = req.query;
+    const { status } = req.body;
+
+    const response = await TaskService.UpdateTask({
+      title,
+      status,
+    });
+
+    return res.status(200).json({
+      message: "Task updated successfully",
+      data: response,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createTaskController,
   getTasksController,
+  updateTaskController,
 };
