@@ -1,14 +1,14 @@
 const Task = require("./tasks.model");
 
 //create task function
-const CreateTask = async ({ title }) => {
-  const createTask = await Task.create({ title });
+const CreateTask = async ({ title, userId }) => {
+  const createTask = await Task.create({ title, userId });
   return createTask;
 };
 
-//get all task function
-const GetAllTasks = async ({ title, status }) => {
-  const query = {};
+//get all task function for a user plus sort using title or status
+const GetAllTasks = async ({ title, status, userId }) => {
+  const query = { userId: userId };
 
   if (title) {
     query.title = title;

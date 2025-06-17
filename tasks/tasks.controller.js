@@ -1,11 +1,13 @@
 const TaskService = require("./tasks.service");
 
+//create new Task controller
 const createTaskController = async (req, res) => {
   try {
     const payload = req.body;
 
     const response = await TaskService.CreateTask({
       title: payload.title,
+      userId: req.user._id,
     });
 
     if (response) {
@@ -22,13 +24,16 @@ const createTaskController = async (req, res) => {
   }
 };
 
+//list all tasks for a particular users plus sort them using title or status
 const getTasksController = async (req, res) => {
   try {
     const { title, status } = req.query;
+    const userId = req.user._id;
 
     const response = await TaskService.GetAllTasks({
       title,
       status,
+      userId,
     });
 
     return res.status(200).json({
