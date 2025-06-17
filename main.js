@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json()); // parse json body
 
 app.get("/", (req, res) => {
-  res.send("Tasks Apis");
+  res.send("Task Manager API");
 });
 
 app.get("/health", (req, res) => {
